@@ -11,6 +11,12 @@ mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true, useUni
     console.log('Successfully connected to the database');
     const db = client.db('companyDB');
 
+    db.collection('employees').find({ department: 'IT' }).toArray((err, data) => {
+      if(!err) {
+        console.log(data)
+      }
+    });
+
     const employeesRoutes = require('./routes/employees.routes');
     const departmentsRoutes = require('./routes/departments.routes');
     const productsRoutes = require('./routes/products.routes');
