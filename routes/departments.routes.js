@@ -69,7 +69,7 @@ router.delete('/departments/:id', async (req, res) => {
   try {
     const dep = await(Department.findById(req.params.id));
     if (dep) {
-      await Department._deleteOne({ _id: req.params.id});
+      await Department.deleteOne({ _id: req.params.id});
       res.json({ message: 'OK' });
     } else {
       res.status(404).json({ message: 'Not found' });
