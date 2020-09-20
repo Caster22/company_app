@@ -1,63 +1,15 @@
-// post.routes.js
-
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/product.model');
+const ProductController = require('../controllers/products.controller');
 
-router.get('/products', async (req, res) => {
-  try {
-    res.json(await Product.find());
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-});
+router.get('/products', ProductController.getAll);
 
-router.get('/products/:id', async (req, res) => {
-  try {
-    const prod = await(Product.findById(req.params.id));
-    if (!prod) res.status(404).json({ message: 'Not found' });
-    else res.json(prod);
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-});
+router.get('/products/:id', ProductController.getById);
 
-router.post('/products', async (req, res) => {
-  const { name, client } = req.body;
+router.post('/products', ProductController.postNew);
 
-  try{
-    const newProd = new Product({ name: name, client: client});
-    await newProd.save();
-    res.json({ message: 'OK' });
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-});
+router.put('/products/:id', ProductController.updateById);
 
-router.put('/products/:id', async (req, res) => {
-  const { name, client } = req.body;
-
-  try{
-    const prod = await(Product.findById(req.params.id));
-    if (prod) {
-      await Product.updateOne({ _id: req.params.id}, { $set: { name: name, client: client} });
-      res.json({ message: 'OK' });
-    }else res.status(404).json({ message: 'Not found' });
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-});
-
-router.delete('/products/:id', async (req, res) => {
-  const prod = await(Product.findById(req.params.id));
-  try {
-    if (prod) {
-      await prod.remove();
-      res.json({ message: 'OK' });
-    } else res.status(404).json({ message: 'Not found' });
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-});
+router.delete('/products/:id', ProductController.removeById);
 
 module.exports = router;
