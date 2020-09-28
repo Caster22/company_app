@@ -3,9 +3,6 @@ const Employee  = require('../emploee.model');
 const mongoose = require('mongoose');
 
 describe('Employee', () => {
-	afterEach(() => {
-		mongoose.models = {};
-	});
 
 	it('should throw an Error if any of args wasn\'t provided', () => {
 		const emp = new Employee({});
