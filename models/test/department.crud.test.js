@@ -1,4 +1,3 @@
-
 const Department = require('../department.model.js');
 const expect = require('chai').expect;
 const mongoose = require('mongoose');
@@ -122,5 +121,8 @@ describe('Department', () => {
 			const deletedDeparts  = await Department.find();
 			expect(deletedDeparts.length).to.be.equal(0);
 		});
+	});
+	after(async () => {
+		mongoose.connection.close();
 	});
 });
