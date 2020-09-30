@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 const request = chai.request;
 
-describe('GET /api/departments', () => {
+describe('GET /departments', () => {
 	before(async () => {
 		const testDepOne = new Department({
 			_id: '5d9f1140f10a81216cfd4408',
