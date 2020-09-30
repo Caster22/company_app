@@ -157,4 +157,7 @@ describe('Employee', () =>{
 			expect(deletedEmp.length).to.be.equal(0);
 		});
 	});
+	after(async () => {
+		mongoose.connection.close();
+	});
 });
