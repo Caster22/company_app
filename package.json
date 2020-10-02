@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "set NODE_ENV=production && mocha \"./{,!(node_modules)/**/}*.test.js\"",
+    "test": "set NODE_ENV=production && mocha  --exit --recursive --timeout 5000 \"./models/test/*.test.js\" &&  mocha \"./test/**/*.test.js\"",
     "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   },
   "dependencies": {
